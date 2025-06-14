@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block content %}
+<div id="camera-container">
+  <video id="camera" autoplay playsinline></video>
+  <button id="capture-button" onclick="capture()">Capture 📸</button>
+
+  <div id="capture-options" style="display: none">
+    <button onclick="retry()">Retry ❌</button>
+    <form action="/capture" method="POST" id="capture-form">
+      <input type="hidden" name="image_data" id="image-data" />
+      <button type="submit">Confirm ✅</button>
+    </form>
+  </div>
+
+  <div id="file-input-container">
+    <input
+      type="file"
+      id="file-input"
+      accept="image/*"
+      onchange="uploadFile()"
+    />
+    <button
+      id="upload-button"
+      onclick="document.getElementById('file-input').click()"
+    >
+      Upload Image 📁
+    </button>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='camera.js') }}"></script>
+{% endblock %}
